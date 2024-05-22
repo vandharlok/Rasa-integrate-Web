@@ -1,5 +1,16 @@
 version: "3.1"
 
+
+actions:
+  - validate_formulario_fabian
+  - action_set_atua_terapeuta
+
+entities:
+  - Menos de 6 meses
+  - Entre 7 e 12 meses
+  - Entre 1 e 2 anos
+  - Há mais de 2 anos
+  
 intents:
   - greet
   - goodbye
@@ -8,6 +19,152 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
+  - duvida_sobre_algo
+  - marcar_consulta
+  - cancelar_consulta
+  - saudações
+
+forms:
+  formulario_fabian:
+    required_slots:
+    - nome
+    - email
+    - telefone
+    - instagram
+    - atua_terapeuta
+    - valor_medio
+    - qtd_sessoes
+    - faturamento_tri
+    - qtd_sess_perm
+    - mtd_proprio
+    - optd_sem
+    - vnd_sem
+    - invts_ads
+    - avg_invts
+    - cost_cust
+    - roas
+  
+
+
+
+slots:
+  atua_terapeuta:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: atua_terapeuta
+        conditions:
+          - active_loop: formulario_fabian
+            requested_slot: atua_terapeuta
+  valor_medio:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+       - active_loop: formulario_fabian
+         requested_slot: valor_medio
+  qtd_sessoes:
+    type: text 
+    mappings:
+    - type: from_text
+      conditions:
+       - active_loop: formulario_fabian
+         requested_slot: qtd_sessoes
+  faturamento_tri:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+       - active_loop: formulario_fabian
+         requested_slot: faturamento_tri
+  qtd_sess_perm:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+       - active_loop: formulario_fabian
+         requested_slot: qtd_sess_perm
+  mtd_proprio:
+    type: text 
+    mappings:
+    - type: from_text
+      conditions:
+       - active_loop: formulario_fabian
+         requested_slot: mtd_proprio
+  optd_sem:
+    type: text  
+    mappings:
+    - type: from_text
+      conditions:
+       - active_loop: formulario_fabian
+         requested_slot: optd_sem
+  vnd_sem:
+    type: text 
+    mappings:
+    - type: from_text
+      conditions:
+       - active_loop: formulario_fabian
+         requested_slot: vnd_sem
+  invts_ads:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+       - active_loop: formulario_fabian
+         requested_slot: invts_ads
+  avg_invts:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+       - active_loop: formulario_fabian
+         requested_slot: avg_invts
+  cost_cust:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+       - active_loop: formulario_fabian
+         requested_slot: cost_cust
+  roas:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+       - active_loop: formulario_fabian
+         requested_slot: roas
+  nome:   
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+        - active_loop: formulario_fabian
+          requested_slot: nome
+  email:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+       - active_loop: formulario_fabian
+         requested_slot: email
+  telefone:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+       - active_loop: formulario_fabian
+         requested_slot: telefone
+  instagram:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+       - active_loop: formulario_fabian
+         requested_slot: instagram
 
 responses:
   utter_greet:
@@ -29,6 +186,71 @@ responses:
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
 
+  utter_ask_formulario_fabian_nome:
+  - text: "Informe seu nome: "
+
+  utter_ask_formulario_fabian_instagram:
+  - text: "Informe seu @ do instagram: "
+  
+  utter_ask_formulario_fabian_telefone:
+  - text: "Informe seu telefone: "
+  
+  utter_ask_formulario_fabian_email:
+  - text: "Informe seu email: "
+  
+  utter_ask_formulario_fabian_atua_terapeuta:
+  - text: "Você atua como Terapeuta há quanto tempo?"
+   
+  utter_ask_formulario_fabian_valor_medio:
+  - text: "Qual o valor médio cobrado por sessão?"
+
+  utter_ask_formulario_fabian_qtd_sessoes:
+  - text: "Quantas sessões em média você realiza MENSALMENTE"
+    buttons:
+    - title: "Menos de 6 meses"
+      payload: "Menos de 6 meses"
+    - title: "Entre 7 e 12 meses"
+      payload: "Entre 7 e 12 meses"
+    - title: "Entre 1 e 2 anos"
+      payload: "Entre 1 e 2 anos"
+    - title: "Há mais de 2 anos"
+      payload: "Há mais de 2 anos"
+
+  utter_ask_formulario_fabian_faturamento_tri:
+  - text: "Qual foi seu faturamento médio do mês no último trimestre?"
+
+  utter_ask_formulario_fabian_qtd_sess_perm:
+  - text: "Por quantas sessões os clientes em sua maior parte permanecem?"
+
+  utter_ask_formulario_fabian_mtd_proprio:
+  - text: "Você possui um método próprio para seus atendimentos?(Um formato de conduzir que você desenvolveu)"
+
+  utter_ask_formulario_fabian_optd_sem:
+  - text: "Quantas novas oportunidades você recebe por SEMANA?"
+
+  utter_ask_formulario_fabian_vnd_sem:
+  - text: "Quantas novas vendas você realiza por SEMANA?"
+
+  utter_ask_formulario_fabian_invts_ads:
+  - text: "Você investe ou já investiu em anúncios?"
+
+  utter_ask_formulario_fabian_avg_invts:
+  - text: "Qual foi sua média de investimento em anúncios no último trimestre?"
+
+  utter_ask_formulario_fabian_cost_cust:
+  - text: "Qual foi seu custo de aquisição de novos clientes com esse investimento?"
+
+  utter_ask_formulario_fabian_atua_roas:
+  - text: "Qual foi seu ROAS (Receita/Investimento em anúncios) médio do último trimestre"
+
+ 
+
+
+
+
+
+
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+
