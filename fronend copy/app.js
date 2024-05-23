@@ -27,6 +27,9 @@ class Chatbox {
             const processedMessage = this.processBotMessage(message);
             if (processedMessage) {
                 this.addMessage("Bot", processedMessage.text, processedMessage.type, processedMessage.buttons);
+                if (processedMessage.type === 'buttons') {
+                    this.toggleInput(false);
+                }
             }
         });
 
@@ -80,6 +83,7 @@ class Chatbox {
 
         this.sendMessage(intent);
         buttonElement.disabled = true;
+        
     }
 
     updateChatText() {
@@ -101,7 +105,7 @@ class Chatbox {
 
                 // Add the buttons
                 const buttonsContainer = document.createElement('div');
-                buttonsContainer.className = 'buttons__container';
+                buttonsContainer.className = 'chat-buttons';
                 item.buttons.forEach((button) => {
                     const buttonElement = document.createElement('button');
                     buttonElement.className = "chat-button";
@@ -117,6 +121,11 @@ class Chatbox {
 
         // Scroll to the bottom of the chat
         chatMessage.scrollTop = chatMessage.scrollHeight;
+    }
+
+    toggleInput(enable) {
+        this.args.messageInput.disabled = !enable;
+        this.args.sendButton.disabled = !enable;
     }
 
     processBotMessage(message) {

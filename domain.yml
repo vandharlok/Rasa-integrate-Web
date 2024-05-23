@@ -4,13 +4,8 @@ version: "3.1"
 actions:
   - validate_formulario_fabian
   - action_set_atua_terapeuta
+  - action_save_data_on_timeout
 
-entities:
-  - Menos de 6 meses
-  - Entre 7 e 12 meses
-  - Entre 1 e 2 anos
-  - Há mais de 2 anos
-  
 intents:
   - greet
   - goodbye
@@ -51,8 +46,7 @@ slots:
   atua_terapeuta:
     type: text
     mappings:
-      - type: from_entity
-        entity: atua_terapeuta
+      - type: from_text
         conditions:
           - active_loop: formulario_fabian
             requested_slot: atua_terapeuta
@@ -200,49 +194,169 @@ responses:
   
   utter_ask_formulario_fabian_atua_terapeuta:
   - text: "Você atua como Terapeuta há quanto tempo?"
-   
+    buttons:
+      - title: "Menos de 6 meses"
+        payload: "Menos de 6 meses"
+      - title: "Entre 7 e 12 meses"
+        payload: "Entre 7 e 12 meses"
+      - title: "Entre 1 e 2 anos"
+        payload: "Entre 1 e 2 anos"
+      - title: "Há mais de 2 anos"
+        payload: "Há mais de 2 anos"
   utter_ask_formulario_fabian_valor_medio:
   - text: "Qual o valor médio cobrado por sessão?"
-
+    buttons:
+      - title: "Até R$99,00"
+        payload: "Até R$99,00"
+      - title: "Entre R$100,00 e R$199,00"
+        payload: "Entre R$100,00 e R$199,00"
+      - title: "Entre R$400,00 e R$799,00"
+        payload: "Entre R$400,00 e R$799,00"
+      - title: "Entre R$800,00 e R$1.000"
+        payload: "Entre R$800,00 e R$1.000"
+      - title: "Mais de R$1.000"
+        payload: "Mais de R$1.000"
   utter_ask_formulario_fabian_qtd_sessoes:
   - text: "Quantas sessões em média você realiza MENSALMENTE"
     buttons:
-    - title: "Menos de 6 meses"
-      payload: "Menos de 6 meses"
-    - title: "Entre 7 e 12 meses"
-      payload: "Entre 7 e 12 meses"
-    - title: "Entre 1 e 2 anos"
-      payload: "Entre 1 e 2 anos"
-    - title: "Há mais de 2 anos"
-      payload: "Há mais de 2 anos"
-
+      - title: "Entre 1 e 20 sessões"
+        payload: "Entre 1 e 20 sessões"
+      - title: "Entre 21 e 40 sessões"
+        payload: "Entre 21 e 40 sessões"
+      - title: "Entre 41 e 60 sessões"
+        payload: "Entre 41 e 60 sessões"
+      - title: "61 sessões ou mais"
+        payload: "61 sessões ou mais"
+      
   utter_ask_formulario_fabian_faturamento_tri:
   - text: "Qual foi seu faturamento médio do mês no último trimestre?"
+    buttons:
+      - title: "Menos de R$5.000"
+        payload: "Menos de R$5.000"
+      - title: "Entre R$5.001 e R$10.000"
+        payload: "Entre R$5.001 e R$10.000"
+      - title: "Entre R$10.001 e R$15.000"
+        payload: "Entre R$10.001 e R$15.000"
+      - title: "Entre R$25.001 e R$40.000"
+        payload: "Entre R$25.001 e R$40.000"
+      - title: "Mais de R$40.000"
+        payload: "Mais de R$40.000"
 
   utter_ask_formulario_fabian_qtd_sess_perm:
   - text: "Por quantas sessões os clientes em sua maior parte permanecem?"
+    buttons:
+      - title: "Menos de 4 sessões"
+        payload: "Menos de 4 sessões"
+      - title: "Entre 5 e 8 sessões"
+        payload: "Entre 5 e 8 sessões"
+      - title: "Entre 9 e 12 sessões"
+        payload: "Entre 9 e 12 sessões"
+      - title: "Entre 13 e 16 sessões"
+        payload: "Entre 13 e 16 sessões"
+      - title: "Mais de 17 sessões"
+        payload: "Mais de 17 sessões"
+      - title: "Não consegui calcular"
+        payload: "Não consegui calcular"
 
   utter_ask_formulario_fabian_mtd_proprio:
   - text: "Você possui um método próprio para seus atendimentos?(Um formato de conduzir que você desenvolveu)"
+    buttons:
+      - title: "Sim"
+        payload: "Sim"
+      - title: "Não"
+        payload: "Não"
+      - title: "Não sei"
+        payload: "Não sei"
 
   utter_ask_formulario_fabian_optd_sem:
   - text: "Quantas novas oportunidades você recebe por SEMANA?"
+    buttons:
+      - title: "Menos de 5 novas"
+        payload: "Menos de 5 novas"
+      - title: "Entre 6 e 15 novas"
+        payload: "Entre 6 e 15 novas"
+      - title: "Entre 16 e 30 novas"
+        payload: "Entre 16 e 30 novas"
+      - title: "Entre 31 e 50 novas"
+        payload: "Entre 31 e 50 novas"
+      - title: "Entre 51 e 70 novas"
+        payload: "Entre 51 e 70 novas"
+      - title: "Mais de 70 novas"
+        payload: "Mais de 70 novas "
 
   utter_ask_formulario_fabian_vnd_sem:
   - text: "Quantas novas vendas você realiza por SEMANA?"
+    buttons:
+      - title: "Menos de 5 novas vendas"
+        payload: "Menos de 5 novas vendas"
+      - title: "Entre 6 e 15 novas vendas"
+        payload: "Entre 6 e 15 novas vendas"
+      - title: "Entre 16 e 30 novas vendas"
+        payload: "Entre 16 e 30 novas vendas"
+      - title: "Entre 31 e 50 novas vendas"
+        payload: "Entre 31 e 50 novas vendas"
+      - title: "Entre 51 e 70 novas vendas"
+        payload: "Entre 51 e 70 novas vendas"
+      - title: "Mais de 70 novas vendas"
+        payload: "Mais de 70 novas vendas"
 
   utter_ask_formulario_fabian_invts_ads:
   - text: "Você investe ou já investiu em anúncios?"
+    buttons:
+      - title: "Nunca investi em anúncios"
+        payload: "Nunca investi em anúncios"
+      - title: "Já investi, mas atualmente não estou investindo"
+        payload: "Já investi, mas atualmente não estou investindo"
+      - title: "Estou investindo em anúncios"
+        payload: "Estou investindo em anúncios"
+    
 
   utter_ask_formulario_fabian_avg_invts:
   - text: "Qual foi sua média de investimento em anúncios no último trimestre?"
+    buttons:
+      - title: "Até R$500,00 por mês"
+        payload: "Até R$500,00 por mês"
+      - title: "Em média, entre R$501,00 e R$1.000,00 por mês"
+        payload: "Em média, entre R$501,00 e R$1.000,00 por mês"
+      - title: "Em média, entre R$1.001,00 e R$2.000,00 por mês"
+        payload: "Em média, entre R$1.001,00 e R$2.000,00 por mês"
+      - title: "Em média, entre R$2.001,00 e R$5.000,00 por mês"
+        payload: "Em média, entre R$2.001,00 e R$5.000,00 por mês"
+      - title: "Mais de R$5.000 por mês"
+        payload: "Mais de R$5.000 por mês"
+      - title: "Nunca investi em anúncios"
+        payload: "Nunca investi em anúncios"
 
   utter_ask_formulario_fabian_cost_cust:
   - text: "Qual foi seu custo de aquisição de novos clientes com esse investimento?"
+    buttons:
+      - title: "Cada novo cliente me custou menos de R$50,00"
+        payload: "Cada novo cliente me custou menos de R$50,00"
+      - title: "Cada novo cliente me custou entre R$51,00 e R$150,00"
+        payload: "Cada novo cliente me custou entre R$51,00 e R$150,00"
+      - title: "Cada novo cliente me custou entre R$151,00 e R$500,00"
+        payload: "Cada novo cliente me custou entre R$151,00 e R$500,00"
+      - title: "Cada novo cliente me custou mais de R$501,00"
+        payload: "Cada novo cliente me custou mais de R$501,00"
+      - title: "Não obtive nenhum novo cliente"
+        payload: "Não obtive nenhum novo cliente"
+      - title: "Nunca investi em anúncios" 
+        payload: "Nunca investi em anúncios"
 
   utter_ask_formulario_fabian_atua_roas:
   - text: "Qual foi seu ROAS (Receita/Investimento em anúncios) médio do último trimestre"
-
+    buttons:
+      - title: "Até 1,5 - Agressivo"
+        payload: "Até 1,5 - Agressivo"
+      - title: "Entre 1,6 e 3,9 - Ponderado"
+        payload: "Entre 1,6 e 3,9 - Ponderado"
+      - title: "Mais de 4 - Convervador"
+        payload: "Mais de 4 - Convervador"
+      - title: "Não consegui calcular"
+        payload: "Não consegui calcular"
+      - title: "Não investi em anúncios no último trimestre"
+        payload: "Não investi em anúncios no último trimestre"
+      
  
 
 
@@ -251,6 +365,6 @@ responses:
 
 
 session_config:
-  session_expiration_time: 60
+  session_expiration_time: 10
   carry_over_slots_to_new_session: true
 

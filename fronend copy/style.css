@@ -60,7 +60,7 @@ body {
 }
 
 .chatbox__button {
-    background-color: #007bff;
+    background-color: white;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -93,6 +93,7 @@ body {
     display: flex;
     overflow-y: scroll;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 .messages__item {
@@ -144,10 +145,16 @@ body {
     font-size: 1.2rem;
     color: white;
 }
-
-chatbox__description--header {
+.logo_image{
+    width: 50px;
+    height: 50px;
+    border-radius: 20px;
+    text-align: start;
+}
+.chatbox__description--header {
     font-size: .9rem;
     color: white;
+    justify-content: start;
 }
 
 /* Messages */
@@ -167,6 +174,7 @@ chatbox__description--header {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
+    margin-bottom:7px;
 }
 
 .messages__item--operator {
@@ -208,7 +216,7 @@ chatbox__description--header {
     background-color: #786c8b;
     border: none;
     color: white;
-    padding: 10px 20px;
+    padding: 15px 25px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -243,21 +251,22 @@ chatbox__description--header {
 
 .chat-button {
     background-color: white;
-    color: blue;
-    border: blue 1px solid; 
+    color: rgb(2, 2, 90);
+    border: 1px solid rgb(7, 7, 92);
     border-radius: 10px;
-    padding: 5px 5px;
-    font-size: 16px;
+    padding: 6px 6px;
+    font-size: 15px;
     cursor: pointer;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    width: 170px;
-    text-align: start;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    width: 200px;
+    text-align: center;
+    justify-content: center;
+    
 }
 
 .chat-button:hover {
-    background-color: blue;
-    color:white;
+    background-color: #c7c2d1;
 }
 
 .chat-button:disabled {
