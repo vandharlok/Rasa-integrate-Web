@@ -40,7 +40,9 @@ class Chatbox {
 
     display() {
         const { openButton, chatBox, sendButton, messageInput } = this.args;
-        openButton.addEventListener('click', () => this.toggleState(chatBox));
+        if (openButton) {
+            openButton.addEventListener('click', () => this.toggleState(chatBox));
+        }
         sendButton.addEventListener('click', () => this.sendMessage(messageInput.value));
         messageInput.addEventListener('keyup', ({ key }) => {
             if (key === 'Enter') {
@@ -83,27 +85,48 @@ class Chatbox {
 
         this.sendMessage(intent);
         buttonElement.disabled = true;
-        
     }
 
     updateChatText() {
         const chatMessage = this.args.chatMessages;
-        chatMessage.innerHTML = ''; // Limpa as mensagens existentes para a nova renderização
+        chatMessage.innerHTML = ''; // Clear existing messages for new rendering
 
         this.messages.forEach((item) => {
             if (item.type === 'text') {
+                const messageContainer = document.createElement('div');
+                messageContainer.className = `messages__container messages__container--${item.name === "Bot" ? "operator" : "visitor"}`;
+                
+                if (item.name === "Bot") {
+                    const image = document.createElement('img');
+                    image.src = './images/logo_chatbox.png';
+                    image.className = 'logo_image';
+                    messageContainer.appendChild(image);
+                }
+                
                 const messageDiv = document.createElement('div');
-                messageDiv.className = `messages__item messages__item--${item.name === "Bot" ? "visitor" : "operator"}`;
+                messageDiv.className = `messages__item messages__item--${item.name === "Bot" ? "operator" : "visitor"}`;
                 messageDiv.innerText = item.message;
-                chatMessage.appendChild(messageDiv);
+                messageContainer.appendChild(messageDiv);
+                
+                chatMessage.appendChild(messageContainer);
             } else if (item.type === 'buttons') {
                 // Add the title text first
-                const titleDiv = document.createElement('div');
-                titleDiv.className = 'messages__item messages__item--visitor';
-                titleDiv.innerText = item.message;
-                chatMessage.appendChild(titleDiv);
+                const messageContainer = document.createElement('div');
+                messageContainer.className = 'messages__container messages__container--operator';
 
-                // Add the buttons
+                const image = document.createElement('img');
+                image.src = './images/logo_chatbox.png';
+                image.className = 'logo_image';
+                messageContainer.appendChild(image);
+
+                const titleDiv = document.createElement('div');
+                titleDiv.className = 'messages__item messages__item--operator';
+                titleDiv.innerText = item.message;
+                messageContainer.appendChild(titleDiv);
+
+                chatMessage.appendChild(messageContainer);
+
+                // Add the buttons container
                 const buttonsContainer = document.createElement('div');
                 buttonsContainer.className = 'chat-buttons';
                 item.buttons.forEach((button) => {
