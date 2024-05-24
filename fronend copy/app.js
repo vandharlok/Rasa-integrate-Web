@@ -9,7 +9,9 @@ class Chatbox {
         };
 
         this.state = false;
-        this.messages = [];
+        this.messages = [
+            { name: "Bot", message: "Oi, bem vindo ao Fidelity Marketing", type: "text", buttons: [] } // Mensagem inicial
+        ];
         this.sessionId = Math.random().toString(36).substring(2, 9);
         this.setupSocket();
         this.handleButtonClick = this.handleButtonClick.bind(this);
@@ -49,6 +51,7 @@ class Chatbox {
                 this.sendMessage(messageInput.value);
             }
         });
+        this.updateChatText(); // Atualiza o chat com a mensagem inicial
     }
 
     toggleState(chatbox) {
