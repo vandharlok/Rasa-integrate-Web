@@ -7,14 +7,14 @@
 
 </strong>Interação Inicial: O chatbot cumprimenta os visitantes e oferece ajuda para responder perguntas sobre os serviços da clínica.</strong>
 
-Qualificação de Leads: Faz perguntas específicas para obter dados comuns entre os visitantes, como nome, email, telefone, instagram, e o tipo de serviço de interesse.
+<strong>Qualificação de Leads:</strong> Faz perguntas específicas para obter dados comuns entre os visitantes, como nome, email, telefone, instagram, e o tipo de serviço de interesse.
 
-Classificação dos leads : O bot faz perguntas para o usuario para saber qual e o nivel do cliente e qual patamar ele se enquadra, para chegar com a melhor abordagem de venda apos saber das necessidades do cliente.
+<strong>Classificação dos leads :</strong> O bot faz perguntas para o usuario para saber qual e o nivel do cliente e qual patamar ele se enquadra, para chegar com a melhor abordagem de venda apos saber das necessidades do cliente.
 
-Armazenamento dos dados: O bot a cada interacao salva os dados da conversa, e mantem os leads em um banco de dados NOSQL, utilizando o MONGODB.
+<strong>Armazenamento dos dados: </strong>O bot a cada interacao salva os dados da conversa, e mantem os leads em um banco de dados NOSQL, utilizando o MONGODB.
 
 <strong>Tecnologias Utilizadas</strong>
 
-Plataforma de Chatbot: Rasa Framework
+<strong>Plataforma de Chatbot:</strong> Rasa Framework
 
-Linguagem de Programação: Python
+<strong>Linguagem de Programação: </strong>Python
